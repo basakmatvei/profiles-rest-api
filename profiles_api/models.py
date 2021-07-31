@@ -16,20 +16,31 @@ class DirectoryManager(models.Manager):
 class Directory(models.Model):
     #Сущность "Справочник"
     id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=255)
-    short_name = models.CharField(max_length=255)
-    description = models.TextField(max_length=255)
-    version = models.CharField(max_length=255)
-    start_date =  models.DateField(auto_now_add=False)
+    name = models.CharField('Наименование',max_length=255)
+    short_name = models.CharField('Короткое наименование',max_length=255)
+    description = models.TextField('Описание',max_length=255)
+    version = models.CharField('Версия',max_length=255)
+    start_date =  models.DateField('Дата начала действия справочника этой версии',auto_now_add=False)
 
     objects = DirectoryManager()
 
-def get_name(self):
-    return self.name
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "Справочник"
+        verbose_name_plural="Справочники"
 
 class DirectoryItem(models.Model):
     #Сущность "Элемент справочника"
     id = models.AutoField(primary_key=True)
-    parent_id = models.ForeignKey(Directory, on_delete = models.CASCADE)
-    element_code = models.CharField(max_length=255)
-    value = models.CharField(max_length=255)
+    parent = models.ForeignKey(Directory, on_delete = models.CASCADE)
+    element_code = models.CharField('Код элемента',max_length=255)
+    value = models.CharField('Значение элемента',max_length=255)
+
+    def __str__(self):
+        return self.value
+
+    class Meta:
+        verbose_name = "Элемент"
+        verbose_name_plural="Элементы"
