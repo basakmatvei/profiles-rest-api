@@ -4,14 +4,14 @@
 Описание:
 
 Технологии:
-python 3
-django 2.2
-django rest framework 3.9.2
-vagrant 2.2.18
+python 3<br>
+django 2.2<br>
+django rest framework 3.9.2<br>
+vagrant 2.2.18<br>
 
 Логин и пароль для входа в панель администрирования:
 
-login: admin
+login: admin<br>
 password: password
 
 
