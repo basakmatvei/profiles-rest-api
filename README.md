@@ -3,7 +3,7 @@
 
 Описание:
 
-Технологии:
+Технологии:<br>
 python 3<br>
 django 2.2<br>
 django rest framework 3.9.2<br>
