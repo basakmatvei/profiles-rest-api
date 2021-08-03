@@ -29,7 +29,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(primary_key=True, serialize=False)),
                 ('element_code', models.CharField(max_length=255)),
                 ('value', models.CharField(max_length=255)),
-                ('parent_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='profiles_api.Directory')),
+                ('parent', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='profiles_api.Directory')),
             ],
         ),
     ]

@@ -1,0 +1,12 @@
+{% extends 'directory/basic.html' %}
+{% block title %}Sort List Elements{% endblock %}
+{% block content %}
+<div class="features">
+    <h1>Элементы по справочникам</h1>
+    <p>Выберите справочник, чтобы отобразились его элементы.</p>
+    {% for dr in directories %}
+    <p><a href="by_directory_items/{{ dr.pk }}/" class="btn btn-warning">{{ dr.name }} | version: {{ dr.version }}<br/></a></p>
+    {% endfor %}
+
+</div>
+{% endblock %}

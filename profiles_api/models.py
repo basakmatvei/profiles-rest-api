@@ -1,6 +1,7 @@
 from django.db import models
 
 
+
 class DirectoryManager(models.Manager):
     def create_directory(self,name,short_name,description,version,start_date, password=None):
         if not name:

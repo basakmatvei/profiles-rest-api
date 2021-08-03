@@ -1,0 +1,15 @@
+{% extends 'directory/basic.html' %}
+{% block title %}Directories filtered by date{% endblock %}
+{% block content %}
+<div class="features">
+    <h1>Отсортированные по дате справочники </h1>
+    <p>Выберите дату для отображения актуальных справочников</p>
+    <!DOCTYPE html>
+ <body>
+  <form>
+   <p><input type="datetime" name="start_date"></p>
+   <p><input type="submit"></p>
+  </form>
+ </body>
+</div>
+{% endblock %}
