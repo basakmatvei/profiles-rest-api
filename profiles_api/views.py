@@ -1,90 +1,22 @@
-from django.shortcuts import render
-from .models import Directory,DirectoryItem
-from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.http import Http404
+from rest_framework.generics import RetrieveAPIView
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from rest_framework import viewsets
+from profiles_api import serializers
+from profiles_api import models
+from profiles_api.models import DirectoryItem, Directory
+from profiles_api.serializers import DirectorySerializer
 
 
-# Вьюшка на главную страницу с списком всех справочников
-def index(request):
-    list_directories = Directory.objects.all()
-    paginator = Paginator(list_directories, 2)
-    page = request.GET.get('page')
-    try:
-        posts = paginator.page(page)
-    except PageNotAnInteger:
-        posts = paginator.page(1)
-    except EmptyPage:
-        posts = paginator.page(paginator.num_pages)
-    return render(request, 'directory/index.html', {'posts': posts})
+class DirectoryViewSet(viewsets.ReadOnlyModelViewSet):
+    serializer_class = serializers.DirectorySerializer
+    queryset = models.Directory.objects.all()
 
 
-# Вьюшка на страницу с списком всех элементов
-def directory_items(request):
-    list_directory_items = DirectoryItem.objects.all()
-    paginator = Paginator(list_directory_items, 10)
-    page = request.GET.get('page')
-    try:
-        posts = paginator.page(page)
-    except PageNotAnInteger:
-        posts = paginator.page(1)
-    except EmptyPage:
-        posts = paginator.page(paginator.num_pages)
-    return render(request, 'directory/directory_items.html', {'posts': posts})
+class DirectoryItemsViewSet(viewsets.ReadOnlyModelViewSet):
+    serializer_class = serializers.DirectoryItemsSerializer
+    queryset = DirectoryItem.objects.all()
 
 
-
-def by_directory_items(request, id):
-    directory_items = DirectoryItem.objects.filter(parent=id)
-    directories = Directory.objects.all()
-    current_directories = Directory.objects.get(pk=id)
-    paginator = Paginator(directory_items, 10)
-    page = request.GET.get('page')
-    try:
-        posts = paginator.page(page)
-    except PageNotAnInteger:
-        posts = paginator.page(1)
-    except EmptyPage:
-        posts = paginator.page(paginator.num_pages)
-    context = {
-        'directory_items': directory_items,
-        'directories': directories,
-        'current_directories': current_directories,
-        'posts': posts,
-    }
-    return render(request, 'directory/by_directory_items.html', context)
-
-
-
-def by_directory_items_basic(request):
-    directories = Directory.objects.all()
-    context = {
-        'directory_items': directory_items,
-        'directories': directories,
-    }
-    return render(request, 'directory/by_directory_items_basic.html', context)
-
-
-def directories_bydate_basic(request):
-    directories = Directory.objects.all()
-    context = {
-        'directories': directories,
-    }
-    return render(request, 'directory/directories_bydate_basic.html', context)
-
-def directories_bydate(request, date):
-
-    directories = Directory.objects.all()
-    current_directories = Directory.objects.get(pk=id)
-    paginator = Paginator(directories, 10)
-    page = request.GET.get('page')
-    try:
-        posts = paginator.page(page)
-    except PageNotAnInteger:
-        posts = paginator.page(1)
-    except EmptyPage:
-        posts = paginator.page(paginator.num_pages)
-    context = {
-        'directories': directories,
-        'current_directories': current_directories,
-        'posts': posts,
-    }
-    return render(request, 'directory/directories_bydate.html', context)

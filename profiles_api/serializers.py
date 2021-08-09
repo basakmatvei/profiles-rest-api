@@ -1,6 +1,18 @@
 from rest_framework import serializers
 
+from profiles_api import models
 
-class HelloSerializer(serializers.Serializer):
-    name = serializers.CharField(max_length=10)
-    
+
+class DirectorySerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.Directory
+        fields = ('id', 'name', 'short_name', 'description', 'version', 'start_date')
+
+
+class DirectoryItemsSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.DirectoryItem
+        fields = ('id', 'parent', 'element_code', 'value')
+
