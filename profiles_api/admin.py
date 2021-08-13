@@ -1,11 +1,11 @@
 from django.contrib import admin
-from .models import Directory,DirectoryItem
+from .models import Directory, DirectoryItem
 
 
 class DirectoryItemAdmin(admin.ModelAdmin):
-    list_display = ('element_code','value','parent')
-    list_display_links=('element_code','value')
-    search_fields = ('code','value')
+    list_display = ('element_code', 'value', 'parent')
+    list_display_links = ('element_code', 'value')
+    search_fields = ('code', 'value')
 
 
 class DirectoryAdmin(admin.ModelAdmin):
@@ -15,4 +15,4 @@ class DirectoryAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Directory)
-admin.site.register(DirectoryItem,DirectoryItemAdmin)
+admin.site.register(DirectoryItem, DirectoryItemAdmin)
