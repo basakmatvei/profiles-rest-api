@@ -30,7 +30,7 @@ class Directory(models.Model):
     name = models.CharField('Наименование', max_length=255)
     short_name = models.CharField('Короткое наименование', max_length=255)
     description = models.TextField('Описание', max_length=255)
-    version = models.CharField('Версия', max_length=255, required=True)
+    version = models.CharField('Версия', max_length=255, blank=False)
     start_date = models.DateField('Дата начала действия справочника этой версии', auto_now_add=False)
     end_date = models.DateField('Дата окончания действия справочника этой версии', auto_now_add=False)
 
@@ -48,8 +48,8 @@ class DirectoryItem(models.Model):
     # Сущность "Элемент справочника"
     id = models.AutoField(primary_key=True)
     parent = models.ForeignKey(Directory, on_delete=models.CASCADE)
-    element_code = models.CharField('Код элемента', max_length=255, required=True)
-    value = models.CharField('Значение элемента', max_length=255, required=True)
+    element_code = models.CharField('Код элемента', max_length=255, blank=False)
+    value = models.CharField('Значение элемента', max_length=255, blank=False)
 
     objects = DirectoryItemManager()
 
